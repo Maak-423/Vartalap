@@ -90,8 +90,10 @@
     roomInput.focus();
   }
 
+  var BACKEND = (window.BACKEND_URL || "").replace(/\/$/, "");
+
   function copyInvite() {
-    var link = window.location.origin + "/?room=" + encodeURIComponent(roomId);
+    var link = window.location.origin + window.location.pathname + "?room=" + encodeURIComponent(roomId);
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(link).then(function () {
         showToast("Invite link copied! 🔗");
@@ -131,7 +133,7 @@
 
     joinError.textContent = "";
 
-    var socket = new SockJS("/ws");
+    var socket = new SockJS(BACKEND + "/ws");
     stompClient = Stomp.over(socket);
     stompClient.debug = null;
 
