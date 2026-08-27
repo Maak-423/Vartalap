@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vartalap · Chat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- Decorative animated background blobs -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<!-- Join screen -->
+<div id="join-screen" class="screen">
+  <div class="card">
+    <div class="logo-badge">💬</div>
+    <h1 class="logo">वार्तालाप</h1>
+    <p class="tagline">Simple realtime chat for two</p>
+
+    <div class="field">
+      <label for="username">Your name</label>
+      <div class="input-wrap">
+        <span class="input-icon">🙂</span>
+        <input id="username" type="text" maxlength="20" placeholder="e.g. Kanoo" autocomplete="off"/>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="room">Room code</label>
+      <div class="input-wrap">
+        <span class="input-icon">🔑</span>
+        <input id="room" type="text" maxlength="20" placeholder="e.g. room-101" autocomplete="off"/>
+        <button type="button" id="dice-btn" class="icon-btn" title="Generate a random room code">🎲</button>
+      </div>
+      <small class="hint">Share this code with the other person so you both land in the same room.</small>
+    </div>
+
+    <button id="join-btn" class="primary">Start chatting →</button>
+    <p id="join-error" class="error"></p>
+  </div>
+</div>
+
+<!-- Chat screen -->
+<div id="chat-screen" class="screen hidden">
+  <header class="chat-header">
+    <div class="header-left">
+      <div id="room-avatar" class="avatar room-avatar">#</div>
+      <div>
+        <h2 id="room-title">Room</h2>
+        <span id="status" class="status offline"><i class="dot"></i>connecting…</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button id="copy-btn" class="ghost" title="Copy invite link">🔗 Invite</button>
+      <button id="leave-btn" class="ghost danger" title="Leave the room">Leave</button>
+    </div>
+  </header>
+
+  <main id="messages" class="messages"></main>
+
+  <div id="typing-indicator" class="typing"></div>
+
+  <form id="chat-form" class="composer" autocomplete="off">
+    <button type="button" id="emoji-btn" class="icon-btn big" title="Add emoji">😊</button>
+    <div id="emoji-picker" class="emoji-picker hidden"></div>
+    <input id="message-input" type="text" aria-label="Message" placeholder="Type a message…" maxlength="1000"/>
+    <button type="submit" class="primary send" title="Send">➤</button>
+  </form>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+<script src="js/chat.js"></script>
+</body>
+</html>
